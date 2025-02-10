@@ -12,8 +12,7 @@ function MotarCycle() {
         engine: "184.40 cc",
         power: "12.7 kW @ 8500 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc1.pdf",
+        document: "/assets/bikes/doc1.pdf",
       },
     },
     {
@@ -25,8 +24,7 @@ function MotarCycle() {
         engine: "110 cc",
         power: "8.01 PS @ 7500 rpm",
         transmission: "4 Gears",
-        document:
-          "/assets/bikes/doc2.pdf",
+        document: "/assets/bikes/doc2.pdf",
       },
     },
     {
@@ -38,8 +36,7 @@ function MotarCycle() {
         engine: "162.71 cc",
         power: "12.9 PS @ 8000 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc3.pdf",
+        document: "/assets/bikes/doc3.pdf",
       },
     },
     {
@@ -51,8 +48,7 @@ function MotarCycle() {
         engine: "124 cc",
         power: "10.7 PS @ 7500 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc4.pdf",
+        document: "/assets/bikes/doc4.pdf",
       },
     },
     {
@@ -64,8 +60,7 @@ function MotarCycle() {
         engine: "124 cc",
         power: "10.7 PS @ 7500 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc5.pdf",
+        document: "/assets/bikes/doc5.pdf",
       },
     },
     {
@@ -77,8 +72,7 @@ function MotarCycle() {
         engine: "110 cc",
         power: "8.01 PS @ 7500 rpm",
         transmission: "4 Gears",
-        document:
-          "/assets/bikes/doc6.pdf",
+        document: "/assets/bikes/doc6.pdf",
       },
     },
     {
@@ -90,8 +84,7 @@ function MotarCycle() {
         engine: "110 cc",
         power: "8.01 PS @ 7500 rpm",
         transmission: "4 Gears",
-        document:
-          "/assets/bikes/doc7.pdf",
+        document: "/assets/bikes/doc7.pdf",
       },
     },
     {
@@ -103,8 +96,7 @@ function MotarCycle() {
         engine: "159 cc",
         power: "12.7 PS @ 8500 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc8.pdf",
+        document: "/assets/bikes/doc8.pdf",
       },
     },
     {
@@ -116,8 +108,7 @@ function MotarCycle() {
         engine: "110 cc",
         power: "8.01 PS @ 7500 rpm",
         transmission: "4 Gears",
-        document:
-          "/assets/bikes/doc9.pdf",
+        document: "/assets/bikes/doc9.pdf",
       },
     },
     {
@@ -129,8 +120,7 @@ function MotarCycle() {
         engine: "100 cc",
         power: "8.01 PS @ 7500 rpm",
         transmission: "4 Gears",
-        document:
-          "/assets/bikes/doc10.pdf",
+        document: "/assets/bikes/doc10.pdf",
       },
     },
     {
@@ -142,8 +132,7 @@ function MotarCycle() {
         engine: "184 cc",
         power: "12.01 PS @ 7500 rpm",
         transmission: "5 Gears",
-        document:
-          "/assets/bikes/doc11.pdf",
+        document: "/assets/bikes/doc11.pdf",
       },
     },
   ];
@@ -164,7 +153,6 @@ function MotarCycle() {
   };
 
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
-  // Update items per page on window resize
   React.useEffect(() => {
     const handleResize = () => {
       setItemsPerPage(getItemsPerPage());
@@ -250,7 +238,6 @@ function MotarCycle() {
             EMI
           </button>
 
-          {/* E-Brochure Button to open the document in a new tab */}
           <a
             href={selectedModel.specs.document}
             target="_blank"
@@ -278,18 +265,16 @@ function MotarCycle() {
         <div className="flex justify-center items-center space-x-4 px-4">
           {visibleModels.map((model) => (
             <div
-              key={model.id} // Use unique id for key and comparison
+              key={model.id}
               className="card border-0 mr-4 cursor-pointer text-center bg-white w-44 max-w-full transition-transform transform hover:scale-105"
               onClick={() => handleModelSelect(model)}
             >
-              {/* Name Image */}
               <img
                 src={model.nameImg}
                 alt={model.name}
                 className="mx-auto h-7"
               />
 
-              {/* Bike Icon */}
               <img
                 src={model.bikeIcon}
                 alt="Bike Icon"

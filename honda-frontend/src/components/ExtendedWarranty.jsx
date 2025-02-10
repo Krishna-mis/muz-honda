@@ -23,12 +23,10 @@ const ExtendedWarranty = () => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -42,11 +40,11 @@ const ExtendedWarranty = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData), // Using state instead of hardcoded values
+          body: JSON.stringify(formData),
         }
       );
 
-      const data = await response.json(); // Parse JSON response
+      const data = await response.json();
 
       if (response.ok) {
         setResponseMessage("Warranty Enquiry Submitted Successfully!");
@@ -58,7 +56,7 @@ const ExtendedWarranty = () => {
           email: "",
           contactNumber: "",
           message: "",
-        }); // Reset form fields
+        });
       } else {
         setResponseMessage(`${data.message}`);
       }
@@ -321,7 +319,6 @@ const ExtendedWarranty = () => {
           </div>
         </div>
 
-        {/* Additional Section for Image and Features */}
         <div className="bg-gray-100 pt-6 pb-12">
           <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Section - Image Only */}

@@ -34,20 +34,21 @@ const ServiceBooking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log("Submitting Form Data:", formData); // Debugging
-  
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/book-service`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      console.log("Response Status:", response.status); // Debugging
-  
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/book-service`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      console.log("Response Status:", response.status);
+
       const data = await response.json();
       if (response.ok) {
         alert("Booking saved successfully!");
@@ -59,14 +60,11 @@ const ServiceBooking = () => {
       alert("An error occurred while submitting the form.");
     }
   };
-  
-  
 
   return (
     <div className="container p-4">
       <h1 className="text-3xl font-bold text-red-600 mb-4">SERVICE BOOKING</h1>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 p-5 mx-2 sm:mx-0">
-        {/* Image + Benefits Section */}
         <div className="col-span-1">
           <div className="flex space-x-4">
             <img
@@ -102,7 +100,6 @@ const ServiceBooking = () => {
         <div className="col-span-1 bg-gray-800 p-4 text-white rounded-md shadow-md">
           <h2 className="text-lg font-bold mb-4">SERVICE BOOKING</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Select Model */}
             <div>
               <label className="block mb-1">SELECT MODEL</label>
               <div className="relative flex items-center">
@@ -128,8 +125,6 @@ const ServiceBooking = () => {
                 </select>
               </div>
             </div>
-
-            {/* Enter Your Model */}
             <div>
               <label className="block mb-1">ENTER YOUR MODEL</label>
               <div className="relative flex items-center">
@@ -144,8 +139,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Year of Purchase */}
             <div>
               <label className="block mb-1">YEAR OF PURCHASE</label>
               <div className="relative flex items-center">
@@ -160,8 +153,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Service Type */}
             <div>
               <label className="block mb-1">SERVICE TYPE</label>
               <div className="relative flex items-center">
@@ -178,8 +169,6 @@ const ServiceBooking = () => {
                 </select>
               </div>
             </div>
-
-            {/* Registration Number */}
             <div>
               <label className="block mb-1">REGISTRATION NUMBER</label>
               <div className="relative flex items-center">
@@ -194,8 +183,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Booking Date */}
             <div>
               <label className="block mb-1">BOOKING DATE</label>
               <div className="relative flex items-center">
@@ -210,8 +197,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Name */}
             <div>
               <label className="block mb-1">YOUR NAME</label>
               <div className="relative flex items-center">
@@ -226,8 +211,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Email Address */}
             <div>
               <label className="block mb-1">EMAIL ADDRESS</label>
               <div className="relative flex items-center">
@@ -242,8 +225,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Contact Number */}
             <div>
               <label className="block mb-1">CONTACT NUMBER</label>
               <div className="relative flex items-center">
@@ -258,8 +239,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Message */}
             <div>
               <label className="block mb-1">WRITE YOUR MESSAGE HERE</label>
               <div className="relative flex items-center">
@@ -273,8 +252,6 @@ const ServiceBooking = () => {
                 />
               </div>
             </div>
-
-            {/* Submit Button */}
             <button
               className="w-full bg-red-600 p-2 rounded text-white font-bold"
               type="submit"

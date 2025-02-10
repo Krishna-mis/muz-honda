@@ -138,7 +138,6 @@ const Finance = () => {
                         setFormData({ ...formData, selectedPOA: doc })
                       }
                     >
-                      {/* ChevronRight icon before the text */}
                       <ChevronRight className="text-red-600" />
                       <span>{doc}</span>
                     </li>
@@ -173,7 +172,6 @@ const Finance = () => {
                         setFormData({ ...formData, selectedPOI: doc })
                       }
                     >
-                      {/* ChevronRight icon before the text */}
                       <ChevronRight className="text-red-600" />
                       <span>{doc}</span>
                     </li>
@@ -183,7 +181,6 @@ const Finance = () => {
             </div>
           </div>
 
-          {/* Form section remains the same */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-gray-500 mb-1">YOUR NAME</label>

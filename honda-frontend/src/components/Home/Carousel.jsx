@@ -3,14 +3,12 @@ import React, { useState, useEffect } from "react";
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Update file extension to .webp
   const slides = Array.from({ length: 16 }, (_, index) => ({
     id: index + 1,
     image: `/assets/home/slide${index + 1}.webp`,
     alt: `Slide ${index + 1}`,
   }));
 
-  // Auto-play functionality
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));

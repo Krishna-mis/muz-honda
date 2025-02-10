@@ -82,18 +82,17 @@ function Scooter() {
   const getItemsPerPage = () => {
     if (typeof window !== "undefined") {
       if (window.innerWidth < 640) {
-        return 1; // Mobile (sm)
+        return 1;
       } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
-        return 2; // Tablet (md)
+        return 2;
       } else {
-        return 4; // Desktop (lg and above)
+        return 4;
       }
     }
-    return 4; // Default (if window is undefined)
+    return 4;
   };
 
   const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
-  // Update items per page on window resize
   React.useEffect(() => {
     const handleResize = () => {
       setItemsPerPage(getItemsPerPage());
@@ -179,7 +178,6 @@ function Scooter() {
             EMI
           </button>
 
-          {/* E-Brochure Button to open the document in a new tab */}
           <a
             href={selectedModel.specs.document}
             target="_blank"
@@ -207,22 +205,21 @@ function Scooter() {
         <div className="flex justify-center items-center space-x-4 px-4">
           {visibleModels.map((model) => (
             <div
-              key={model.id} // Use unique id for key and comparison
+              key={model.id}
               className="card border-0 mr-4 cursor-pointer text-center bg-white w-44 max-w-full transition-transform transform hover:scale-105"
               onClick={() => handleModelSelect(model)}
             >
-              {/* Name Image */}
               <img
                 src={model.nameImg}
                 alt={model.name}
-                className="mx-auto h-7" // Adjust height for logo image
+                className="mx-auto h-7"
               />
 
               {/* Bike Icon */}
               <img
                 src={model.bikeIcon}
                 alt="Bike Icon"
-                className="img-fluid mx-auto my-2 w-32 h-32 object-contain" // Adjust size and spacing for bike icon
+                className="img-fluid mx-auto my-2 w-32 h-32 object-contain"
               />
             </div>
           ))}

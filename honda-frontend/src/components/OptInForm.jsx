@@ -95,7 +95,6 @@ const OptInForm = () => {
       </h1>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col lg:flex-row items-center lg:items-start min-h-screen gap-8">
-          {/* Left Side: Form */}
           <div className="w-full lg:w-1/2 px-4 md:px-10">
             <div className="space-y-4">
               <div>
@@ -215,7 +214,6 @@ const OptInForm = () => {
             </div>
           </div>
 
-          {/* Right Side: YouTube Video */}
           <div className="w-full lg:w-1/2 px-4">
             <div className="relative w-full h-64 lg:h-96">
               <iframe

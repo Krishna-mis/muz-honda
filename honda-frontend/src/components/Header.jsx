@@ -101,7 +101,6 @@ const Header = () => {
         >
           <div className="container mx-auto px-4 py-2">
             <div className="grid grid-cols-2 md:grid-cols-[auto_1fr] items-center">
-              {/* Left Section - Logo */}
               <div className="flex items-center">
                 <img
                   src="/logo.png"
@@ -111,9 +110,7 @@ const Header = () => {
                 />
               </div>
 
-              {/* Right Section - Content + Navigation */}
               <div className="flex flex-col items-end w-full">
-                {/* Upper Content with Image + Text */}
                 <div className="hidden md:flex items-center text-right gap-3 mb-2">
                   <img
                     src="/assets/honda-logo.png"

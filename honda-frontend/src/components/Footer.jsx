@@ -6,19 +6,15 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="relative bg-black text-gray-300 px-4 sm:px-8 md:px-16 lg:px-40 py-10 mt-auto text-sm sm:text-base">
-      {/* Dark overlay background */}
       <div className="absolute inset-0 bg-black/90 z-0"></div>
-
       <div className="container mx-auto relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo Section */}
           <div className="space-y-4 text-left">
-          <img
-  src={Icon}
-  alt="Honda Logo"
-  className="h-20 sm:h-24 md:h-28 w-auto mx-auto md:mx-0" // Further increased height
-/>
-
+            <img
+              src={Icon}
+              alt="Honda Logo"
+              className="h-20 sm:h-24 md:h-28 w-auto mx-auto md:mx-0"
+            />
           </div>
 
           {/* Navigation Links */}
@@ -95,8 +91,6 @@ const Footer = () => {
                 <span>Support: 7360001206</span>
               </p>
             </div>
-
-            
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ const HondaTwoWheelers = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Updated models array
   const models = Array.from({ length: 11 }, (_, index) => ({
     id: index + 1,
     nameImg: `/assets/bikes/name${index + 1}.webp`,
@@ -22,7 +21,7 @@ const HondaTwoWheelers = () => {
     if (activeIndex < maxIndex) {
       setActiveIndex(activeIndex + 1);
     } else {
-      setActiveIndex(0); // Loop back to the first set of models
+      setActiveIndex(0);
     }
   };
 
@@ -30,7 +29,7 @@ const HondaTwoWheelers = () => {
     if (activeIndex > 0) {
       setActiveIndex(activeIndex - 1);
     } else {
-      setActiveIndex(maxIndex); // Loop back to the last set of models
+      setActiveIndex(maxIndex);
     }
   };
 

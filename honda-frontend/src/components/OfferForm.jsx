@@ -54,19 +54,15 @@ const OfferForm = () => {
       <h1 className="text-3xl font-bold text-red-600 mb-4">OFFERS</h1>
       <div className="flex flex-col md:flex-row gap-4 px-10 h-[500px] md:h-[600px]">
         {" "}
-        {/* Increased height */}
-        {/* Offer Image */}
         <div className="flex-1 border rounded p-4 h-full">
           <img
             alt="Offer"
-            className="w-full h-full object-cover rounded-lg" // Full height and width
+            className="w-full h-full object-cover rounded-lg"
             src="/assets/offer1.jpg"
           />
         </div>
-        {/* Form Section */}
         <div className="flex-1 h-full flex items-center">
           {" "}
-          {/* Center content */}
           <form
             onSubmit={handleSubmit}
             className="w-full h-full flex flex-col justify-center"

@@ -53,7 +53,6 @@ const SocialSidebar = () => {
         </div>
       </div>
 
-      {/* Toggle Button */}
       <button
         onClick={() => setIsVisible(!isVisible)}
         className={`absolute top-1/2 -translate-y-1/2 ${

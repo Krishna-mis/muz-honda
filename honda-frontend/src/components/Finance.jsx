@@ -54,10 +54,10 @@ const Finance = () => {
           agreed: false,
         });
       } else {
-        setResponseMessage(`❌ ${data.message}`);
+        setResponseMessage(`${data.message}`);
       }
     } catch (error) {
-      setResponseMessage("❌ Failed to submit. Please try again later.");
+      setResponseMessage(" Failed to submit. Please try again later.");
     }
   };
   const handleDropdownClick = (dropdown) => {

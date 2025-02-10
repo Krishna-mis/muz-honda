@@ -68,7 +68,7 @@ const OptInForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("✅ Opt-In Request Submitted Successfully!");
+        setMessage("Opt-In Request Submitted Successfully!");
         setFormData({ registration: "", name: "", mobile: "" });
         setNotifications({
           all: false,
@@ -79,10 +79,10 @@ const OptInForm = () => {
           whatsapp: false,
         });
       } else {
-        setMessage(`❌ Error: ${data.message}`);
+        setMessage(`Error: ${data.message}`);
       }
     } catch (error) {
-      setMessage("❌ Network error. Please try again later.");
+      setMessage("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }

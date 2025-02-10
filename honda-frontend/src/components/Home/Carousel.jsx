@@ -6,7 +6,7 @@ const Carousel = () => {
   // Update file extension to .webp
   const slides = Array.from({ length: 16 }, (_, index) => ({
     id: index + 1,
-    image: `/assets/home/slide${index + 1}.webp`, // ✅ Using .webp format
+    image: `/assets/home/slide${index + 1}.webp`,
     alt: `Slide ${index + 1}`,
   }));
 

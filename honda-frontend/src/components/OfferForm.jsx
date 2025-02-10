@@ -8,8 +8,8 @@ const OfferForm = () => {
     contact: "",
     agree: false,
   });
-  const [loading, setLoading] = useState(false); // ✅ Fix added
-  const [responseMessage, setResponseMessage] = useState(""); // ✅ Added for success/error messages
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,13 +37,13 @@ const OfferForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setResponseMessage("✅ Offer Enquiry Submitted Successfully!");
+        setResponseMessage("Offer Enquiry Submitted Successfully!");
         setFormData({ name: "", email: "", contact: "", agree: false });
       } else {
-        setResponseMessage(`❌ ${data.message}`);
+        setResponseMessage(`${data.message}`);
       }
     } catch (error) {
-      setResponseMessage("❌ Failed to submit. Please try again later.");
+      setResponseMessage("Failed to submit. Please try again later.");
     }
 
     setLoading(false);

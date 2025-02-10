@@ -49,7 +49,7 @@ const ExtendedWarranty = () => {
       const data = await response.json(); // Parse JSON response
 
       if (response.ok) {
-        setResponseMessage("✅ Warranty Enquiry Submitted Successfully!");
+        setResponseMessage("Warranty Enquiry Submitted Successfully!");
         setFormData({
           model: "",
           yearOfPurchase: "",
@@ -60,11 +60,11 @@ const ExtendedWarranty = () => {
           message: "",
         }); // Reset form fields
       } else {
-        setResponseMessage(`❌ ${data.message}`);
+        setResponseMessage(`${data.message}`);
       }
     } catch (error) {
       console.error("Error:", error);
-      setResponseMessage("❌ Failed to submit. Please try again later.");
+      setResponseMessage("Failed to submit. Please try again later.");
     }
 
     setLoading(false);
@@ -193,18 +193,18 @@ const ExtendedWarranty = () => {
                   >
                     <option value="">SELECT MODEL</option>
                     <option value="honda-activa-6g">Honda Activa 6G</option>
-                  <option value="honda-cb-shine">Honda CB Shine</option>
-                  <option value="honda-unicorn">Honda Unicorn</option>
-                  <option value="honda-cbr-150r">Honda CBR 150R</option>
-                  <option value="honda-x-blade">Honda X-Blade</option>
-                  <option value="honda-hornet-2-0">Honda Hornet 2.0</option>
-                  <option value="honda-dio">Honda Dio</option>
-                  <option value="honda-cb500x">Honda CB500X</option>
-                  <option value="honda-crf1100l-africa-twin">
-                    Honda CRF1100L Africa Twin
-                  </option>
-                  <option value="honda-cbr1000rr">Honda CBR1000RR</option>
-                  <option value="honda-cb1000r">Honda CB1000R</option>
+                    <option value="honda-cb-shine">Honda CB Shine</option>
+                    <option value="honda-unicorn">Honda Unicorn</option>
+                    <option value="honda-cbr-150r">Honda CBR 150R</option>
+                    <option value="honda-x-blade">Honda X-Blade</option>
+                    <option value="honda-hornet-2-0">Honda Hornet 2.0</option>
+                    <option value="honda-dio">Honda Dio</option>
+                    <option value="honda-cb500x">Honda CB500X</option>
+                    <option value="honda-crf1100l-africa-twin">
+                      Honda CRF1100L Africa Twin
+                    </option>
+                    <option value="honda-cbr1000rr">Honda CBR1000RR</option>
+                    <option value="honda-cb1000r">Honda CB1000R</option>
                   </select>
                 </div>
               </div>

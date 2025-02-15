@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db"); // MySQL Connection
+const db = require("../config/db");
 
 router.post("/", (req, res) => {
   const {
@@ -61,7 +61,7 @@ router.post("/", (req, res) => {
         message,
       ],
       (error, results) => {
-        connection.release(); // Release connection back to the pool
+        connection.release();
 
         if (error) {
           console.error("Warranty Enquiry Error:", error);

@@ -11,6 +11,9 @@ import {
   FileText,
   ChevronRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Finance = () => {
   const [formData, setFormData] = useState({
@@ -23,9 +26,7 @@ const Finance = () => {
     agreed: false,
   });
 
-  const [responseMessage, setResponseMessage] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@ const Finance = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setResponseMessage("Finance Enquiry Submitted Successfully!");
+        toast.success("Finance Enquiry Submitted Successfully!");
         setFormData({
           name: "",
           email: "",
@@ -54,10 +55,10 @@ const Finance = () => {
           agreed: false,
         });
       } else {
-        setResponseMessage(`${data.message}`);
+        toast.error(`${data.message}`);
       }
     } catch (error) {
-      setResponseMessage(" Failed to submit. Please try again later.");
+      toast.error(" Failed to submit. Please try again later.");
     }
   };
   const handleDropdownClick = (dropdown) => {
@@ -90,6 +91,7 @@ const Finance = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-6 lg:p-8">
+      <ToastContainer />
       <div>
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-red-600 mb-4">
@@ -319,7 +321,9 @@ const Finance = () => {
               />
               <span>
                 Yes, I agree with all{" "}
-                <span className="text-red-600">Terms & Conditions</span>
+                <Link to="/terms-conditions" className="text-red-600">
+                  Terms & Conditions
+                </Link>
               </span>
             </div>
 

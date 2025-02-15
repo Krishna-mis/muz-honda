@@ -9,6 +9,8 @@ import {
   FaPencilAlt,
   FaCheck,
 } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ServiceBooking = () => {
   const [formData, setFormData] = useState({
@@ -47,23 +49,22 @@ const ServiceBooking = () => {
         }
       );
 
-      console.log("Response Status:", response.status);
-
       const data = await response.json();
+
       if (response.ok) {
-        alert("Booking saved successfully!");
+        toast.success("Booking saved successfully!");
       } else {
-        alert("Error: " + data.message);
+        toast.error(`Error: ${data.message}`);
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred while submitting the form.");
+      toast.error("An error occurred while submitting the form.");
     }
   };
 
   return (
     <div className="container p-4">
       <h1 className="text-3xl font-bold text-red-600 mb-4">SERVICE BOOKING</h1>
+      <ToastContainer />
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 p-5 mx-2 sm:mx-0">
         <div className="col-span-1">
           <div className="flex space-x-4">

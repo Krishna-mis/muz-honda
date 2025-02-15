@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db"); // MySQL Connection
+const db = require("../config/db");
 
 // Submit Finance Form
 router.post("/", (req, res) => {
   const { name, email, contact, loanAmount, model, message, agreed } = req.body;
-  const loanAmountNum = parseFloat(loanAmount); // Convert loanAmount to number
+  const loanAmountNum = parseFloat(loanAmount);
 
   // Input Validation
   if (

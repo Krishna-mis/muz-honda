@@ -5,9 +5,9 @@ const mysql = require("mysql");
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "", // Change if you have a password
+  password: "",
   database: "muzhonda",
-  connectionLimit: 10, // Limit concurrent connections
+  connectionLimit: 10,
 });
 
 // Test the connection
@@ -18,7 +18,7 @@ db.getConnection((err, connection) => {
   }
 
   console.log("Successfully connected to MySQL database");
-  connection.release(); // Release connection back to the pool
+  connection.release();
 });
 
 module.exports = db;

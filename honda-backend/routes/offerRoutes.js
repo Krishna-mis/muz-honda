@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db"); // MySQL Connection
+const db = require("../config/db");
 
 // Submit Offer Form
 router.post("/", (req, res) => {
@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
     }
 
     connection.query(query, [name, email, contact], (error, results) => {
-      connection.release(); // Release connection back to the pool
+      connection.release();
 
       if (error) {
         console.error("Offer Submission Error:", error);

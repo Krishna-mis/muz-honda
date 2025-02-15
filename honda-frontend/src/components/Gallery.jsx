@@ -1,55 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const images = [
-  "/assets/bikes/banner1.webp",
-  "/assets/bikes/banner2.webp",
-  "/assets/bikes/banner3.webp",
-  "/assets/bikes/banner4.webp",
-  "/assets/bikes/banner5.webp",
-  "/assets/bikes/banner6.webp",
-  "/assets/bikes/banner7.webp",
-  "/assets/bikes/banner8.webp",
-];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Gallery = () => {
+  const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") setSelectedImage(null);
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/gallery`);
+        const data = await response.json();
+
+        const formattedData = data.map((img) => ({
+          id: img.id,
+          url: `${API_BASE_URL}/${img.image_path.replace(/\\/g, "/")}`,
+        }));
+
+        setImages(formattedData);
+      } catch (error) {
+        toast.error("Error fetching gallery images:", error);
+      }
     };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+
+    fetchImages();
   }, []);
 
   return (
     <div className="bg-white flex flex-col items-center py-5">
       <h1 className="text-3xl font-bold text-red-600 mb-4">IMAGES</h1>
+      <ToastContainer />
 
       {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 w-full max-w-screen-xl">
-        {images.map((image, index) => (
+        {images.map((image) => (
           <div
-            key={index}
+            key={image.id}
             className="p-2 cursor-pointer flex justify-center items-center"
-            onClick={() => setSelectedImage(image)}
+            onClick={() => setSelectedImage(image.url)}
           >
             <img
-              alt={`Placeholder image ${index + 1}`}
+              alt="Gallery Image"
               className="w-full h-auto max-h-[300px] sm:max-h-[350px] md:max-h-[400px] object-contain rounded-lg shadow-md transition-transform hover:scale-105"
-              src={image}
+              src={image.url}
             />
           </div>
         ))}
       </div>
 
-      {/* Modal */}
+      {/* Modal for Image Preview */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-0 backdrop-blur-md flex justify-center items-center z-50 transition-all duration-300 opacity-100"
+          className="fixed inset-0 backdrop-blur-lg bg-opacity-30 flex justify-center items-center z-50 transition-all duration-300"
           onClick={() => setSelectedImage(null)}
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
         >
           <div
             className="relative bg-white p-4 rounded-lg shadow-lg max-w-3xl w-full mx-4 animate-fadeIn"

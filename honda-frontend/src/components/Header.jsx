@@ -135,9 +135,9 @@ const Header = () => {
                 {/* Navigation Menu */}
                 <nav
                   className={`absolute md:relative left-0 right-0 top-full
-            bg-white md:bg-transparent md:shadow-none shadow-lg transition-all duration-300
-            ${isMenuOpen ? "block" : "hidden md:block"}
-            w-full md:w-auto z-50`}
+    bg-white md:bg-transparent md:shadow-none shadow-lg transition-all duration-300
+    ${isMenuOpen ? "block" : "hidden md:block"}
+    w-full md:w-auto z-50`}
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-end w-full md:w-auto">
                     {navItems.map((item) => (
@@ -147,8 +147,10 @@ const Header = () => {
                       >
                         <button
                           className={`w-full md:w-auto px-6 py-3 flex items-center justify-between md:justify-center gap-2
-        text-sm font-semibold cursor-pointer hover:font-bold
-        ${activeTab === item.path ? "bg-red-600 text-white" : "text-red-600"}`}
+            text-sm font-semibold cursor-pointer hover:font-bold
+            ${
+              activeTab === item.path ? "bg-red-600 text-white" : "text-red-600"
+            }`}
                           onClick={() =>
                             item.hasDropdown
                               ? toggleDropdown(item.name)
@@ -168,14 +170,15 @@ const Header = () => {
                         {item.hasDropdown && (
                           <div
                             className={`md:absolute md:top-full md:left-0 bg-white w-full md:w-48 shadow-lg
-          transition-all duration-200
-          ${activeDropdown === item.name ? "block" : "hidden"}
-          md:group-hover:block`}
+      transition-all duration-200
+      ${activeDropdown === item.name ? "block" : "hidden"}
+      md:group-hover:block`}
                           >
                             {item.dropdownItems.map((dropItem) => (
                               <button
                                 key={dropItem.path}
-                                className="w-full px-6 py-3 text-sm text-red-600 hover:bg-red-600 hover:text-white text-left"
+                                className={`w-full px-6 py-3 text-sm text-red-600 hover:font-bold text-left
+          ${activeTab === dropItem.path ? "bg-red-600 text-white" : ""}`}
                                 onClick={() => handleNavClick(dropItem.path)}
                               >
                                 {dropItem.name}

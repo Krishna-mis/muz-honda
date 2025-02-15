@@ -16,6 +16,8 @@ import OptInForm from "./components/OptInForm";
 import TermsAndConditions from "./components/TermsAndConditions";
 import OfferForm from "./components/OfferForm";
 import SocialSidebar from "./components/SocialSidebar";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminDashboard from "./components/Admin/AdminDashboard";
 
 const ScrollToTop = () => {
   const location = useLocation();
@@ -28,31 +30,39 @@ const ScrollToTop = () => {
 };
 
 function App() {
+  const location = useLocation();
+
+  // Check if the current path is "/admin/login"
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
-    <SocialSidebar/>
-      <Header />
+      {!isAdminRoute && <SocialSidebar />}
+      {!isAdminRoute && <Header />}
 
       <ScrollToTop />
-      
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/finance" element={<Finance />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/motorcycle" element={<MotarCycle/>}/>
-        <Route path="/scooters" element={<Scooter/>}/>
+        <Route path="/motorcycle" element={<MotarCycle />} />
+        <Route path="/scooters" element={<Scooter />} />
         <Route path="/service-booking" element={<ServiceBooking />} />
-        <Route path="/amc" element={<AnnualMaintenanceContract/>} />
-        <Route path="/extendedWarranty" element={<ExtendedWarranty/>} />
+        <Route path="/amc" element={<AnnualMaintenanceContract />} />
+        <Route path="/extendedWarranty" element={<ExtendedWarranty />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/optain" element={<OptInForm/>} />
-        <Route path="/terms-conditions" element={<TermsAndConditions/>}/>
+        <Route path="/optain" element={<OptInForm />} />
+        <Route path="/terms-conditions" element={<TermsAndConditions />} />
         <Route path="/offers" element={<OfferForm />} />
+
+        {/* Admin Login */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
-      
-      <Footer />
+
+      {!isAdminRoute && <Footer />}
     </>
   );
 }

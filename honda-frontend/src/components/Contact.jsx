@@ -7,6 +7,8 @@ import {
   MessageCircle,
   HelpCircle,
 } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +20,6 @@ const ContactForm = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +29,6 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setResponseMessage("");
 
     try {
       const response = await fetch(
@@ -44,7 +44,9 @@ const ContactForm = () => {
 
       const data = await response.json();
       if (response.ok) {
-        setResponseMessage("Contact request submitted successfully!");
+        toast.success("Contact request submitted successfully!", {
+          position: "top-right",
+        });
         setFormData({
           name: "",
           email: "",
@@ -53,10 +55,10 @@ const ContactForm = () => {
           message: "",
         });
       } else {
-        setResponseMessage(` Error: ${data.message}`);
+        toast.error(` Error: ${data.message}`);
       }
     } catch (error) {
-      setResponseMessage("Network error. Please try again later.");
+      toast.error("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -64,6 +66,7 @@ const ContactForm = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-10 py-10">
+      <ToastContainer />
       <div className="flex flex-col lg:flex-row gap-10">
         {/* Left Section */}
         <div className="w-full lg:w-1/2 space-y-6">
@@ -237,12 +240,6 @@ const ContactForm = () => {
             >
               {loading ? "Submitting..." : "SUBMIT"}
             </button>
-
-            {responseMessage && (
-              <p className="mt-2 text-center text-gray-700">
-                {responseMessage}
-              </p>
-            )}
           </form>
         </div>
       </div>

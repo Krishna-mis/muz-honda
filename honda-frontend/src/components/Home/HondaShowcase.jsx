@@ -1,56 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const HondaTwoWheelers = () => {
   const navigate = useNavigate();
+  const [bikes, setBikes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const itemsPerPage = 3;
 
-  const models = Array.from({ length: 11 }, (_, index) => ({
-    id: index + 1,
-    nameImg: `/assets/bikes/name${index + 1}.webp`,
-    bikeIcon: `/assets/bikes/bikeIcon${index + 1}.webp`,
-  }));
+  useEffect(() => {
+    const fetchBikes = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/bikes`);
+        const data = await response.json();
+        setBikes(data);
+      } catch (error) {
+        toast.error("Error fetching bikes:", error);
+      }
+    };
+    fetchBikes();
+  }, []);
 
-  const maxIndex = Math.floor(models.length / 3);
-
-  const handleDotClick = (index) => {
-    setActiveIndex(index);
-  };
+  const maxIndex = Math.ceil(bikes.length / itemsPerPage) - 1;
 
   const nextSlide = () => {
-    if (activeIndex < maxIndex) {
-      setActiveIndex(activeIndex + 1);
-    } else {
-      setActiveIndex(0);
-    }
+    setActiveIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
   };
 
   const prevSlide = () => {
-    if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
-    } else {
-      setActiveIndex(maxIndex);
-    }
+    setActiveIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
   };
 
   return (
-    <div className="container mx-auto p-2 sm:p-3 md:p-4 lg:p-10 bg-white text-gray-800 custom-margin-top ">
-      <div className="px-2 sm:px-4 md:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
+    <div className="container mx-auto p-4 bg-white text-gray-800 custom-margin-top">
+      <ToastContainer />
+      <div className="px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         {/* About Section */}
         <div className="w-full md:w-1/2">
-          <h2 className="text-red-600 text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">
-            ABOUT US
-          </h2>
-          <h3 className="text-black text-lg sm:text-xl font-bold mb-2">
+          <h2 className="text-red-600 text-3xl font-bold mb-4">ABOUT US</h2>
+          <h3 className="text-black text-xl font-bold mb-2">
             HONDA IS THE WORLD'S LARGEST MANUFACTURER OF TWO WHEELERS
           </h3>
-          <p className="text-gray-600 text-sm sm:text-base mb-4">
-            Muzaffarpur Honda is Honda Exclusive Authorised Dealership in
-            Muzaffrapur. Muzaffarpur honda diversified into Honda 2 Wheelers
-            Dealership in Muzaffarpur in September 2016.
+          <p className="text-gray-600 mb-4">
+            Muzaffarpur Honda is Honda Exclusive Authorized Dealership in
+            Muzaffarpur. Muzaffarpur Honda diversified into Honda 2 Wheelers
+            Dealership in September 2016.
           </p>
           <button
-            className="bg-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded text-sm sm:text-base cursor-pointer hover:bg-red-700 transition-colors"
+            className="bg-red-600 text-white px-4 py-2 rounded text-base cursor-pointer hover:bg-red-700 transition-colors"
             onClick={() => navigate("/about")}
           >
             KNOW MORE...
@@ -59,26 +58,29 @@ const HondaTwoWheelers = () => {
 
         {/* Models Section */}
         <div className="w-full md:w-1/2 mt-6 md:mt-0 relative">
-          <h3 className="text-red-600 text-lg sm:text-xl font-bold mb-3 sm:mb-4">
+          <h3 className="text-red-600 text-xl font-bold mb-4">
             EXPLORE OTHER MODELS
           </h3>
 
           {/* Carousel Container */}
-          <div className="relative">
-            <div className="flex overflow-hidden">
-              {models
-                .slice(activeIndex * 3, (activeIndex + 1) * 3)
-                .map((model) => (
-                  <div key={model.id} className="w-1/3 px-1 sm:px-2">
+          <div className="relative overflow-hidden">
+            <div className="flex">
+              {bikes
+                .slice(
+                  activeIndex * itemsPerPage,
+                  (activeIndex + 1) * itemsPerPage
+                )
+                .map((bike) => (
+                  <div key={bike.id} className="w-1/3 px-2">
                     <img
-                      src={model.nameImg}
-                      alt={model.name}
-                      className="mx-auto h-5 sm:h-6 md:h-7"
+                      src={`${BASE_URL}${bike.nameImg}`}
+                      alt="Bike Name"
+                      className="mx-auto h-7"
                     />
                     <img
-                      src={model.bikeIcon}
+                      src={`${BASE_URL}${bike.bikeIcon}`}
                       alt="Bike Icon"
-                      className="mx-auto my-2 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-contain"
+                      className="mx-auto my-2 w-32 h-32 object-contain"
                     />
                   </div>
                 ))}
@@ -86,13 +88,13 @@ const HondaTwoWheelers = () => {
 
             {/* Carousel Navigation */}
             <button
-              className="absolute top-1/2 left-0 transform -translate-y-1/2 cursor-pointer bg-black/30 hover:bg-black/50 text-white p-1.5 sm:p-2 rounded-full"
+              className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
               onClick={prevSlide}
             >
               ❮
             </button>
             <button
-              className="absolute top-1/2 right-0 transform -translate-y-1/2 cursor-pointer bg-black/30 hover:bg-black/50 text-white p-1.5 sm:p-2 rounded-full"
+              className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full"
               onClick={nextSlide}
             >
               ❯
@@ -103,12 +105,12 @@ const HondaTwoWheelers = () => {
               {[...Array(maxIndex + 1)].map((_, index) => (
                 <button
                   key={index}
-                  className={`w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full transition-colors ${
+                  className={`w-3 h-3 rounded-full transition-colors ${
                     index === activeIndex
                       ? "bg-red-600"
                       : "bg-gray-300 hover:bg-gray-400"
                   }`}
-                  onClick={() => handleDotClick(index)}
+                  onClick={() => setActiveIndex(index)}
                 />
               ))}
             </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosPerson } from "react-icons/io";
 import { MdAppRegistration } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OptInForm = () => {
   const [formData, setFormData] = useState({
@@ -68,7 +70,7 @@ const OptInForm = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Opt-In Request Submitted Successfully!");
+        toast.success("Opt-In Request Submitted Successfully!");
         setFormData({ registration: "", name: "", mobile: "" });
         setNotifications({
           all: false,
@@ -79,10 +81,10 @@ const OptInForm = () => {
           whatsapp: false,
         });
       } else {
-        setMessage(`Error: ${data.message}`);
+        toast.error(`Error: ${data.message}`);
       }
     } catch (error) {
-      setMessage("Network error. Please try again later.");
+      toast.error("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -93,6 +95,7 @@ const OptInForm = () => {
       <h1 className="text-2xl font-bold text-red-600 mb-6 text-center mt-4">
         OPTAIN FORM
       </h1>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col lg:flex-row items-center lg:items-start min-h-screen gap-8">
           <div className="w-full lg:w-1/2 px-4 md:px-10">

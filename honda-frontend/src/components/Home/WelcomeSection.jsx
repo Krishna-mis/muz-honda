@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import welcome_img from "../../assets/images/welcome-img.png";
 
 const WelcomeSection = () => {
-  useEffect(() => {
-    console.log("WelcomeSection Rendered");
-  });
-
   return (
     <div className="flex flex-col md:flex-row items-center justify-center w-full py-12 bg-gray-50 p-10">
       {/* Text Content */}

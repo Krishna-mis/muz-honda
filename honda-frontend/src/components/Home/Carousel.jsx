@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slides, setSlides] = useState([]);
 
-  const slides = Array.from({ length: 16 }, (_, index) => ({
-    id: index + 1,
-    image: `/assets/home/slide${index + 1}.webp`,
-    alt: `Slide ${index + 1}`,
-  }));
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/images`);
+        const data = await response.json();
+        setSlides(data);
+      } catch (error) {
+        toast.error("Error fetching images:", error);
+      }
+    };
+    fetchImages();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,17 +36,22 @@ const Carousel = () => {
 
   return (
     <div className="hidden md:block relative w-full">
+      <ToastContainer />
       <div className="relative w-full h-[300px] md:h-[400px] lg:h-[600px] overflow-hidden">
-        {slides.map((slide, index) => (
-          <img
-            key={slide.id}
-            src={slide.image}
-            alt={slide.alt}
-            className={`absolute w-full h-full object-contain transition-opacity duration-700 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        ))}
+        {slides.length > 0 ? (
+          slides.map((slide, index) => (
+            <img
+              key={slide.id}
+              src={`${BASE_URL}/${slide.filepath}`}
+              alt={`Slide ${index + 1}`}
+              className={`absolute w-full h-full object-contain transition-opacity duration-700 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))
+        ) : (
+          <p className="text-center text-white">Loading images...</p>
+        )}
       </div>
 
       {/* Navigation Buttons */}

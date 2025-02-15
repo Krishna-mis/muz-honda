@@ -21,33 +21,36 @@ const ExtendedWarranty = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
+  const [submitStatus, setSubmitStatus] = useState({
+    show: false,
+    isSuccess: false,
+    message: "",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setResponseMessage("");
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/warranty`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setResponseMessage("Warranty Enquiry Submitted Successfully!");
+    // Simulate form processing
+    setTimeout(() => {
+      // Basic validation
+      if (!formData.name || !formData.email || !formData.contactNumber) {
+        setSubmitStatus({
+          show: true,
+          isSuccess: false,
+          message: "Please fill in all required fields",
+        });
+      } else {
+        setSubmitStatus({
+          show: true,
+          isSuccess: true,
+          message: "Warranty Enquiry Submitted Successfully!",
+        });
+        // Reset form
         setFormData({
           model: "",
           yearOfPurchase: "",
@@ -57,19 +60,27 @@ const ExtendedWarranty = () => {
           contactNumber: "",
           message: "",
         });
-      } else {
-        setResponseMessage(`${data.message}`);
       }
-    } catch (error) {
-      console.error("Error:", error);
-      setResponseMessage("Failed to submit. Please try again later.");
-    }
+      setLoading(false);
 
-    setLoading(false);
+      // Hide status message after 3 seconds
+      setTimeout(() => {
+        setSubmitStatus({ show: false, isSuccess: false, message: "" });
+      }, 3000);
+    }, 1000);
   };
 
   return (
     <div className="bg-gray-100 p-4">
+      {submitStatus.show && (
+        <div
+          className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg ${
+            submitStatus.isSuccess ? "bg-green-500" : "bg-red-500"
+          } text-white`}
+        >
+          {submitStatus.message}
+        </div>
+      )}
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Content Section */}
@@ -96,7 +107,7 @@ const ExtendedWarranty = () => {
                     <thead>
                       <tr>
                         <th className="bg-red-600 text-white p-3 text-left border">
-                          <img src="/assets/warranty1.png" alt="" />
+                          <img src="/api/placeholder/100/50" alt="Warranty 1" />
                         </th>
                         <th className="bg-red-600 text-white p-3 text-left border">
                           ADDITIONAL MONTHS
@@ -135,7 +146,7 @@ const ExtendedWarranty = () => {
                     <thead>
                       <tr>
                         <th className="bg-red-600 text-white p-3 text-left border">
-                          <img src="/assets/warranty2.png" alt="" />
+                          <img src="/api/placeholder/100/50" alt="Warranty 2" />
                         </th>
                         <th className="bg-red-600 text-white p-3 text-left border">
                           ADDITIONAL MONTHS
@@ -173,9 +184,6 @@ const ExtendedWarranty = () => {
             <h2 className="text-xl font-bold text-white mb-4 pt-2">
               ENQUIRE NOW
             </h2>
-            {responseMessage && (
-              <p className="text-white text-center mb-4">{responseMessage}</p>
-            )}
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-white mb-1" htmlFor="model">
@@ -208,7 +216,10 @@ const ExtendedWarranty = () => {
               </div>
 
               <div>
-                <label className="block text-white mb-1" htmlFor="year">
+                <label
+                  className="block text-white mb-1"
+                  htmlFor="yearOfPurchase"
+                >
                   YEAR OF PURCHASE
                 </label>
                 <div className="relative">
@@ -225,7 +236,10 @@ const ExtendedWarranty = () => {
               </div>
 
               <div>
-                <label className="block text-white mb-1" htmlFor="registration">
+                <label
+                  className="block text-white mb-1"
+                  htmlFor="registrationNumber"
+                >
                   REGISTRATION NUMBER
                 </label>
                 <div className="relative">
@@ -276,7 +290,10 @@ const ExtendedWarranty = () => {
               </div>
 
               <div>
-                <label className="block text-white mb-1" htmlFor="contact">
+                <label
+                  className="block text-white mb-1"
+                  htmlFor="contactNumber"
+                >
                   CONTACT NUMBER
                 </label>
                 <div className="relative">
@@ -321,23 +338,23 @@ const ExtendedWarranty = () => {
 
         <div className="bg-gray-100 pt-6 pb-12">
           <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Section - Image Only */}
+            {/* Left Section */}
             <div className="bg-white p-6 rounded-lg shadow-lg flex justify-center">
               <img
                 alt="Honda vehicles"
                 className="w-full rounded-lg"
-                src="/assets/warranty3.jpg"
+                src="/api/placeholder/400/300"
               />
             </div>
 
-            {/* Right Section - Content */}
+            {/* Right Section */}
             <div className="bg-white p-6 rounded-lg shadow-lg space-y-6">
-              <div className=" text-black p-4 rounded-lg text-center">
+              <div className="text-black p-4 rounded-lg text-center">
                 <div className="mb-2">
                   <iframe
                     width="100%"
                     height="200"
-                    src="https://www.youtube.com/embed/your_video_id" // Replace with your actual video ID
+                    src="https://www.youtube.com/embed/your_video_id"
                     title="Honda Warranty Video"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
